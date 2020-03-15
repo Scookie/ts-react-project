@@ -1,4 +1,5 @@
 import React,{ Component } from "react";
+import "./hello.css"
 
 export interface Props {
   name: string;
