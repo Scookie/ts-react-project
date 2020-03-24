@@ -1,6 +1,10 @@
 import React,{ Component } from "react";
-import "./hello.css"
+import "./hello.css";
+const styles: React.CSSProperties = {
+  padding:"5px 50px"
+}
 
+const onClick : React.ReactEventHandler<HTMLButtonElement> = (ev) => {};
 export interface Props {
   name: string;
   enthusiasmLevel?: number;
@@ -12,7 +16,7 @@ interface State {
   currentEnthusiasm: number;
 }
 
-function Hello({ name, enthusiasmLevel = 1, onIncrement, onDecrement }: Props) {
+const Hello: React.FC<Props> = ({ name, enthusiasmLevel = 1, onIncrement, onDecrement }: Props) => {
   if(enthusiasmLevel <= 0){
     throw new Error("you could be little more enthusiastic. :D");
   }
@@ -23,8 +27,8 @@ function Hello({ name, enthusiasmLevel = 1, onIncrement, onDecrement }: Props) {
         Hello {name + getExclamationMask(enthusiasmLevel)}    
       </div>
       <div>
-        <button onClick={onIncrement}>+</button>
-        <button onClick={onDecrement}>-</button>
+        <button style={styles} onClick={onIncrement}>+</button>
+        <button style={styles} onClick={onDecrement}>-</button>
       </div>
     </div>
   );
