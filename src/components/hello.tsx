@@ -1,5 +1,6 @@
 import React,{ Component } from "react";
 import "./hello.css";
+
 const styles: React.CSSProperties = {
   padding:"5px 50px"
 }
@@ -35,9 +36,13 @@ const Hello: React.FC<Props> = ({ name, enthusiasmLevel = 1, onIncrement, onDecr
 }
 
 // class Hello extends Component<Props,State>{
+//   static defaultProps = {
+//     currentEnthusiasm:1
+//   }
+
 //   constructor(props:Props){
 //     super(props);
-//     this.state = { currentEnthusiasm: props.enthusiasmLevel || 1 };
+//     this.state = { currentEnthusiasm: props.enthusiasmLevel || 1};
 //   }
 
 //   onIncrement = () => {
