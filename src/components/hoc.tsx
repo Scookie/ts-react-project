@@ -1,22 +1,22 @@
 import React from "react";
 import { Diff } from "utility-types";
-// import Hello from "./hello";
+import Hello from "./hello";
 import { FCCounter } from "./fccCounter";
 interface InjectedProps {
-  count: number;
-  onIncrement: () => void;
+  name: string;
+  enthusiasmLevel: number;
 }
 
 export const hocHello = <BaseProps extends InjectedProps>(
-  BaseComponent: React.ComponentType<BaseProps>
+  BaseComponent: React.ComponentType<BaseProps>,
 ) => {
   type HocProps = Diff<BaseProps, InjectedProps> & {
     // ...其他的props
-    initialCount?: number;
+    name:string
   };
 
   type HocState = {
-    readonly count: number;
+    readonly enthusiasmLevel: number;
   };
 
   return class Hoc extends React.Component<HocProps, HocState> {
@@ -25,20 +25,32 @@ export const hocHello = <BaseProps extends InjectedProps>(
     static readonly WrappedComponent = BaseComponent;
 
     readonly state: HocState = {
-      count: Number(this.props.initialCount) || 0,
+      enthusiasmLevel: 3
     }
 
     handleIncrement = () => {
-      this.setState({count:this.state.count+1});
+      this.setState({enthusiasmLevel:this.state.enthusiasmLevel+1});
+    }
+
+    handleDecrement = () => {
+      if(this.state.enthusiasmLevel <= 3){
+        let confirmResult =  window.confirm("could you maind keeping your enthusiasm ?");
+        if(!confirmResult){
+          this.setState({enthusiasmLevel:this.state.enthusiasmLevel-1});
+        }
+      }else{
+        this.setState({enthusiasmLevel:this.state.enthusiasmLevel-1});
+      }
     }
 
     render() {
       const { ...restProps } = this.props;
-      const { count } = this.state;
+      const { enthusiasmLevel } = this.state;
       return (
         <BaseComponent
-          count={count}
+          enthusiasmLevel={enthusiasmLevel}
           onIncrement={this.handleIncrement}
+          onDecrement={this.handleDecrement}
           {...( restProps as BaseProps)}
         />
       );
@@ -46,5 +58,5 @@ export const hocHello = <BaseProps extends InjectedProps>(
   }
 };
 
-const FCCounterWithState = hocHello(FCCounter);
-export default () => <FCCounterWithState label="x"/>;
+const FCCounterWithState = hocHello(Hello);
+export default (props:{name:string}) => <FCCounterWithState {...props}/>;

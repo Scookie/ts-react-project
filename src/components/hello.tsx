@@ -8,7 +8,7 @@ const styles: React.CSSProperties = {
 const onClick : React.ReactEventHandler<HTMLButtonElement> = (ev) => {};
 export interface Props {
   name: string;
-  enthusiasmLevel?: number;
+  enthusiasmLevel: number;
   onIncrement?: () => void;
   onDecrement?: () => void;
 }

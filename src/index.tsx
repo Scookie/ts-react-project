@@ -8,10 +8,10 @@ import * as serviceWorker from './serviceWorker';
 import HocHello from "./components/hoc";
 
 // ReactDOM.render(<Hello name="TypeScript" enthusiasmLevel={3} />, document.getElementById('root'));
-ReactDOM.render(<HocHello/>, document.getElementById('root'));
+ReactDOM.render(<HocHello name="watermelon"/>, document.getElementById('root'));
 
 // If you want your app to work offline and load faster, you can change
-// unregister() to register() below. Note this comes with some pitfalls.
+// unregister() to register() below. Note th is comes with some pitfalls.
 // Learn more about service workers: https://bit.ly/CRA-PWA
 serviceWorker.unregister();
 
